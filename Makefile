@@ -2,8 +2,13 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17
 LDFLAGS =
 
-SOURCES := $(bash scripts/sourcesGenerator.sh)
-OBJECTS := $(SOURCES:.cpp=.o)
+# Generar sources.cmake antes de compilar
+scripts/sources.cmake: scripts/sourcesGenerator.py
+	python3 scripts/sourcesGenerator.py
+
+# Obtener lista de fuentes desde el script
+SOURCES := $(shell python3 scripts/sourcesGenerator.py)
+OBJECTS := $(SOURCES:src/%.cpp=obj/%.o)
 EXECUTABLE = Homeros
 
 # Detección de sistema
@@ -16,15 +21,16 @@ else
     endif
 endif
 
-all: $(EXECUTABLE)
+# Asegurar que obj/ exista
+$(shell mkdir -p obj)
+
+all: scripts/sources.cmake $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o: %.cpp
+obj/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS) $(EXECUTABLE) scripts/sources.cmake
-
-.PHONY: all clean
