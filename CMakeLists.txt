@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(SDL2 REQUIRED)
 
+include(sources.cmake)
+
 set(SOURCES
     src/main.cpp
     src/game.cpp
@@ -15,7 +17,6 @@ set(SOURCES
 )
 
 include_directories(${SDL2_INCLUDE_DIRS} src)
-include(sources.cmake)
 
 add_executable(Homeros ${SOURCES})
 
