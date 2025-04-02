@@ -1,7 +1,7 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include "renderer.hpp"
+#include "../renderer.hpp"
 
 class Scene {
 public:

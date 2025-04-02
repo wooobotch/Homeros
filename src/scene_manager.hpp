@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <unordered_map>
-#include "scene.hpp"
+#include "scenes/scene.hpp"
 
 class SceneManager {
 public:
