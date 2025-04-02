@@ -1,19 +1,17 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
+#include <SDL2/SDL.h>
 #include "../renderer.hpp"
 
 class Scene {
 public:
     virtual ~Scene() = default;
 
-    // Para manejar la entrada del usuario
-    virtual void handleInput() = 0;
+    virtual void handleInput(SDL_Event& event) = 0;
 
-    // Para actualizar la lógica de la escena
     virtual void update() = 0;
 
-    // Para renderizar la escena
     virtual void render(Renderer& renderer) = 0;
 };
 

@@ -8,21 +8,25 @@
 int main() {
     Window window("Homeros", 800, 600, 60);
     Renderer renderer(window);
-    InputHandler inputHandler;
     SceneManager sceneManager;
+    InputHandler inputHandler(sceneManager);
 
-    sceneManager.changeScene(new SplashScreenScene(renderer, "assets/logo.png"));
+    sceneManager.addScene("splash", std::make_shared<SplashScreenScene>(renderer, "assets/logo.png"));
+    sceneManager.changeScene("splash");
 
     bool running = true;
 
     while (running) {
         inputHandler.handleEvents(running);
+
+        sceneManager.update();
         renderer.clear();
+        sceneManager.render(renderer);
         renderer.present();
+
         window.delayFrame();
     }
 
-    SDL_DestroyTexture(image);
     SDL_Quit();
     return 0;
 }

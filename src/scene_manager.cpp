@@ -21,3 +21,9 @@ void SceneManager::render(Renderer& renderer) {
         currentScene->render(renderer);
     }
 }
+
+void SceneManager::handleInput(SDL_Event& event) {
+    if (currentScene) {
+        currentScene->handleInput(event);
+    }
+}

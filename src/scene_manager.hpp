@@ -12,13 +12,14 @@ public:
 
     void changeScene(const std::string& sceneName);
     void update();
-    void render();
+    void render(Renderer& renderer);
+    void handleInput(SDL_Event& event);
 
-    void addScene(const std::string& name, std::unique_ptr<Scene> scene);
+    void addScene(const std::string& name, std::shared_ptr<Scene> scene);
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Scene>> scenes;
-    Scene* currentScene;
+    std::unordered_map<std::string, std::shared_ptr<Scene>> scenes;
+    std::shared_ptr<Scene> currentScene;
 };
 
 #endif
