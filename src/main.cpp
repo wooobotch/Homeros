@@ -1,13 +1,26 @@
-#include <SDL2/SDL.h>
-#include <iostream>
+#include "window.hpp"
+#include "renderer.hpp"
+#include "input_handler.hpp"
 
-int main(int argc, char* argv[]) {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cerr << "Error al iniciar SDL2: " << SDL_GetError() << std::endl;
-        return 1;
+int main() {
+    Window window("Homeros", 800, 600, 60);
+    Renderer renderer(window.getSDLWindow());
+    InputHandler inputHandler;
+
+    bool running = true;
+
+    // Cargar una imagen
+    SDL_Texture* image = renderer.loadTexture("assets/sprites/logo.png");
+    if (!image) return -1;
+
+    while (running) {
+        inputHandler.handleEvents(running);
+        renderer.clear();
+        renderer.renderTexture(image, 200, 150, 400, 300);
+        renderer.present();
+        window.delayFrame();
     }
 
-    SDL_Quit();
-    std::cout << "SDL2 inicializado correctamente." << std::endl;
+    SDL_DestroyTexture(image);
     return 0;
 }
