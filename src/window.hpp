@@ -16,11 +16,9 @@ public:
     void delayFrame() const;
 
     SDL_Window* getSDLWindow() const;
-    SDL_Renderer* getSDLRenderer() const;
 
 private:
     SDL_Window* window;
-    SDL_Renderer* renderer;
     bool running;
     int frameDelay;
 };

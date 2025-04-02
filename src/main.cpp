@@ -4,7 +4,7 @@
 
 int main() {
     Window window("Homeros", 800, 600, 60);
-    Renderer renderer(window.getSDLWindow());
+    Renderer renderer(window);
     InputHandler inputHandler;
 
     bool running = true;
@@ -22,5 +22,6 @@ int main() {
     }
 
     SDL_DestroyTexture(image);
+    SDL_Quit();
     return 0;
 }
