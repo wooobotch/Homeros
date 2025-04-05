@@ -1,6 +1,6 @@
 #include "input_handler.hpp"
 
-InputHandler::InputHandler() {}
+InputHandler::InputHandler(SceneManager& sceneManager) : sceneManager(sceneManager) {}
 
 void InputHandler::handleEvents(bool &running) {
     SDL_Event event;
