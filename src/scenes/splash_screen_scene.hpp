@@ -3,6 +3,7 @@
 
 #include "scene.hpp"
 #include "../renderer.hpp"
+#include "../scene_manager.hpp"
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -11,9 +12,10 @@ private:
     SDL_Texture* logoTexture;
     Uint32 startTime;
     const Uint32 duration = 3000; // 3 segundos
+    SceneManager& sceneManager;
 
 public:
-    SplashScreenScene(Renderer& renderer, const std::string& logoPath);
+    SplashScreenScene(Renderer& renderer, SceneManager& sceneManager, const std::string& logoPath);
     ~SplashScreenScene();
 
     void handleInput(SDL_Event& event) override;

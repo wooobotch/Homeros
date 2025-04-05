@@ -2,6 +2,7 @@
 #include "renderer.hpp"
 #include "scene_manager.hpp"
 #include "scenes/splash_screen_scene.hpp"
+#include "scenes/menu_scene.hpp"
 #include "input_handler.hpp"
 #include <iostream>
 
@@ -11,7 +12,9 @@ int main() {
     SceneManager sceneManager;
     InputHandler inputHandler(sceneManager);
 
-    sceneManager.addScene("splash", std::make_shared<SplashScreenScene>(renderer, "assets/logo.png"));
+    sceneManager.addScene("splash", std::make_shared<SplashScreenScene>(renderer, sceneManager, "assets/logo.png"));
+    sceneManager.addScene("menu", std::make_shared<MenuScene>());
+
     sceneManager.changeScene("splash");
 
     bool running = true;

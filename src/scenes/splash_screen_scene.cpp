@@ -2,8 +2,8 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-SplashScreenScene::SplashScreenScene(Renderer& renderer, const std::string& logoPath)
-    : logoTexture(nullptr), startTime(SDL_GetTicks()) {
+SplashScreenScene::SplashScreenScene(Renderer& renderer, SceneManager& sceneManager, const std::string& logoPath)
+    : logoTexture(nullptr), startTime(SDL_GetTicks()), sceneManager(sceneManager) {
     logoTexture = renderer.loadTexture(logoPath);
     if (!logoTexture) {
         std::cerr << "Error cargando la imagen del splash screen: " << IMG_GetError() << std::endl;
@@ -21,14 +21,19 @@ void SplashScreenScene::handleInput(SDL_Event& event) {
         exit(0);
     }
 
-    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-        std::cout << "Enter presionado. Cambiar a la siguiente escena." << std::endl;
+    if (event.type == SDL_KEYDOWN) {
+        SDL_Keycode key = event.key.keysym.sym;
+        if (key == SDLK_ESCAPE || key == SDLK_RETURN || key == SDLK_SPACE) {
+            std::cout << "Tecla presionada. Cambiando a la siguiente escena..." << std::endl;
+            sceneManager.changeScene("menu"); // Verificar nombre de próxima escena
+        }
     }
 }
 
 void SplashScreenScene::update() {
     if (SDL_GetTicks() - startTime > duration) {
         std::cout << "Splash Screen terminado. Cambiar a la siguiente escena." << std::endl;
+            sceneManager.changeScene("menu"); // Verificar nombre de próxima escena
     }
 }
 
