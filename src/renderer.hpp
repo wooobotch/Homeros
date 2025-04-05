@@ -17,6 +17,9 @@ public:
     SDL_Texture* loadTexture(const std::string& filePath);
     void renderTexture(SDL_Texture* texture, int x, int y, int w, int h);
 
+//Ver renderer.cpp
+//    void setClearColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+
 private:
     SDL_Renderer* renderer;
 };

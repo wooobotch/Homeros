@@ -25,6 +25,13 @@ void MenuScene::update() {
     // Menu + lógica
 }
 
+// old
+//void MenuScene::render(Renderer& renderer) {
+//    renderer.setClearColor(20, 30, 60, 255); // azul oscuro
+//    renderer.clear();
+//    renderer.present();
+//}
+
 void MenuScene::render(Renderer& renderer) {
     SDL_SetRenderDrawColor(renderer.getSDLRenderer(), 20, 30, 60, 255);
     SDL_RenderClear(renderer.getSDLRenderer());
