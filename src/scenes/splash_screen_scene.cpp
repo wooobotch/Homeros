@@ -16,19 +16,19 @@ SplashScreenScene::~SplashScreenScene() {
     }
 }
 
-void SplashScreenScene::handleInput() {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            exit(0);
-        }
+void SplashScreenScene::handleInput(SDL_Event& event) {
+    if (event.type == SDL_QUIT) {
+        exit(0);
+    }
+
+    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+        std::cout << "Enter presionado. Cambiar a la siguiente escena." << std::endl;
     }
 }
 
 void SplashScreenScene::update() {
     if (SDL_GetTicks() - startTime > duration) {
         std::cout << "Splash Screen terminado. Cambiar a la siguiente escena." << std::endl;
-        // Aquí iría la lógica para cambiar a otra escena
     }
 }
 

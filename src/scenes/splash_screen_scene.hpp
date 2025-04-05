@@ -16,7 +16,7 @@ public:
     SplashScreenScene(Renderer& renderer, const std::string& logoPath);
     ~SplashScreenScene();
 
-    void handleInput() override;
+    void handleInput(SDL_Event& event) override;
     void update() override;
     void render(Renderer& renderer) override;
 };
