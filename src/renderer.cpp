@@ -38,3 +38,28 @@ void Renderer::renderTexture(SDL_Texture* texture, int x, int y, int w, int h) {
     SDL_Rect destRect = {x, y, w, h};
     SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 }
+
+SDL_Texture* Renderer::renderText(const std::string& message, TTF_Font* font, SDL_Color color) {
+    SDL_Surface* surface = TTF_RenderUTF8_Blended(font, message.c_str(), color);
+    if (!surface) {
+        std::cerr << "Error creando superficie de texto: " << TTF_GetError() << std::endl;
+        return nullptr;
+    }
+
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
+
+    if (!texture) {
+        std::cerr << "Error creando textura de texto: " << SDL_GetError() << std::endl;
+    }
+
+    return texture;
+}
+
+void Renderer::renderTextTexture(SDL_Texture* texture, int x, int y) {
+    SDL_Rect destRect;
+    destRect.x = x;
+    destRect.y = y;
+    SDL_QueryTexture(texture, nullptr, nullptr, &destRect.w, &destRect.h);
+    SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+}
