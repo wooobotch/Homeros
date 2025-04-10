@@ -7,19 +7,24 @@ find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 
+include_directories(${SDL2_INCLUDE_DIRS} src src/scenes)
+
 include(sources.cmake)
 
-set(SOURCES
-    src/main.cpp
-    src/game.cpp
-    src/window.cpp
-    src/scene_manager.cpp
-    src/audio_manager.cpp
-    src/renderer.cpp
-    src/input_handler.cpp
-)
+#set(SOURCES
+#    src/main.cpp
+#    src/game.cpp
+#    src/window.cpp
 
-include_directories(${SDL2_INCLUDE_DIRS} src)
+#    src/renderer.cpp
+#    src/input_handler.cpp
+#    src/audio_manager.cpp
+#    src/scene_manager.cpp
+#    src/scenes/game_scene.cpp
+#    src/scenes/menu_scene.cpp
+#    src/scenes/options_scene.cpp
+#    src/scenes/splash_screen_scene.cpp
+#)
 
 add_executable(Homeros ${SOURCES})
 

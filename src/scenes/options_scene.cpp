@@ -2,7 +2,7 @@
 #include <iostream>
 
 OptionsScene::OptionsScene()
-    : options({"Brillo", "Volumen", "Idioma", "Sorpresa"}), selectedIndex(0), font(nullptr) {
+    : sceneManager(sceneManager), options({"Brillo", "Volumen", "Idioma", "Sorpresa"}), selectedIndex(0), font(nullptr) {
 
     font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 28);
     if (!font) {
@@ -27,9 +27,7 @@ void OptionsScene::handleInput(SDL_Event& event) {
         SDL_Keycode key = event.key.keysym.sym;
         if (key == SDLK_ESCAPE) {
             std::cout << "Volviendo al menú..." << std::endl;
-            // Presuponemos acceso global o singleton a SceneManager, o se adapta a tu flujo.
-            // Lo ideal es que SceneManager se pase por referencia en constructor como en SplashScreenScene.
-            // Por ahora puedes modificar el constructor si querés que vuelva.
+            sceneManager.changeScene("menu");
         } else if (key == SDLK_DOWN) {
             selectedIndex = (selectedIndex + 1) % options.size();
         } else if (key == SDLK_UP) {

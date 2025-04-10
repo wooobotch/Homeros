@@ -15,9 +15,9 @@ int main() {
     InputHandler inputHandler(sceneManager);
 
     sceneManager.addScene("splash", std::make_shared<SplashScreenScene>(renderer, sceneManager, "assets/logo.png"));
-    sceneManager.addScene("menu", std::make_shared<MenuScene>());
-    sceneManager.addScene("game", std::make_shared<GameScene>());
-    sceneManager.addScene("options", std::make_shared<OptionsScene>());
+    sceneManager.addScene("menu", std::make_shared<MenuScene>(sceneManager));
+    sceneManager.addScene("game", std::make_shared<GameScene>(sceneManager));
+    sceneManager.addScene("options", std::make_shared<OptionsScene>(sceneManager));
 
     sceneManager.changeScene("splash");
 
