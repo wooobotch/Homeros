@@ -2,7 +2,7 @@
 #include <iostream>
 
 MenuScene::MenuScene()
-    : options({"Iniciar", "Opciones", "Salir"}), selectedIndex(0), font(nullptr) {
+    : sceneManager(sceneManager), options({"Iniciar", "Opciones", "Salir"}), selectedIndex(0), font(nullptr) {
 
     font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 28);
     if (!font) {
@@ -36,6 +36,42 @@ void MenuScene::handleInput(SDL_Event& event) {
             std::cout << "Seleccionado: " << options[selectedIndex] << std::endl;
             if (options[selectedIndex] == "Salir") {
                 exit(0);
+            }
+        }
+    }
+
+    if (event.type == SDL_MOUSEMOTION) {
+        int mouseX = event.motion.x;
+        int mouseY = event.motion.y;
+
+        int x = 100, y = 150;
+        for (size_t i = 0; i < options.size(); ++i) {
+            int w, h;
+            TTF_SizeText(font, options[i].c_str(), &w, &h);
+            SDL_Rect rect = {x, y + static_cast<int>(i) * 50, w, h};
+            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+                selectedIndex = static_cast<int>(i);
+                break;
+            }
+        }
+    }
+
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
+        int mouseX = event.button.x;
+        int mouseY = event.button.y;
+
+        int x = 100, y = 150;
+        for (size_t i = 0; i < options.size(); ++i) {
+            int w, h;
+            TTF_SizeText(font, options[i].c_str(), &w, &h);
+            SDL_Rect rect = {x, y + static_cast<int>(i) * 50, w, h};
+            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+                std::cout << "Clickeado: " << options[i] << std::endl;
+                if (options[i] == "Salir") {
+                    exit(0);
+                }
+                // Acción específica según la opción
+                break;
             }
         }
     }

@@ -5,11 +5,12 @@
 #include <SDL2/SDL_ttf.h>
 #include "scene.hpp"
 #include "../renderer.hpp"
+#include "../scene_manager.hpp"
 #include <string>
 
 class MenuScene : public Scene {
 public:
-    MenuScene();
+    MenuScene(SceneManager& sceneManager);
     ~MenuScene();
 
     void handleInput(SDL_Event& event) override;
@@ -20,6 +21,7 @@ private:
     std::vector<std::string> options;
     int selectedIndex;
     TTF_Font* font;
+    SceneManager& sceneManager;
 };
 
 #endif
