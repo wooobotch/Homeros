@@ -1,7 +1,7 @@
 #include "menu_scene.hpp"
 #include <iostream>
 
-MenuScene::MenuScene()
+MenuScene::MenuScene(SceneManager& sceneManager)
     : sceneManager(sceneManager), options({"Iniciar", "Opciones", "Salir"}), selectedIndex(0), font(nullptr) {
 
     font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 28);
@@ -53,7 +53,9 @@ void MenuScene::handleInput(SDL_Event& event) {
             int w, h;
             TTF_SizeText(font, options[i].c_str(), &w, &h);
             SDL_Rect rect = {x, y + static_cast<int>(i) * 50, w, h};
-            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+            SDL_Point point{mouseX, mouseY};
+//            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+            if (SDL_PointInRect(&point, &rect)) {
                 selectedIndex = static_cast<int>(i);
                 break;
             }
@@ -69,7 +71,9 @@ void MenuScene::handleInput(SDL_Event& event) {
             int w, h;
             TTF_SizeText(font, options[i].c_str(), &w, &h);
             SDL_Rect rect = {x, y + static_cast<int>(i) * 50, w, h};
-            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+            SDL_Point point{mouseX, mouseY};
+//            if (SDL_PointInRect(&SDL_Point{mouseX, mouseY}, &rect)) {
+            if (SDL_PointInRect(&point, &rect)) {
                 std::cout << "Clickeado: " << options[i] << std::endl;
                 if (options[i] == "Salir") {
                     exit(0);

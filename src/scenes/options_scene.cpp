@@ -1,7 +1,7 @@
 #include "options_scene.hpp"
 #include <iostream>
 
-OptionsScene::OptionsScene()
+OptionsScene::OptionsScene(SceneManager& sceneManager)
     : sceneManager(sceneManager), options({"Brillo", "Volumen", "Idioma", "Sorpresa"}), selectedIndex(0), font(nullptr) {
 
     font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 28);

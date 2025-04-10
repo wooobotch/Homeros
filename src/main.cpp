@@ -32,6 +32,7 @@ int main() {
         window.delayFrame();
     }
 
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }

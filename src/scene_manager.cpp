@@ -1,5 +1,8 @@
 #include "scene_manager.hpp"
 
+SceneManager::SceneManager() = default;
+SceneManager::~SceneManager() = default;
+
 void SceneManager::addScene(const std::string& name, std::shared_ptr<Scene> scene) {
     scenes[name] = scene;
 }

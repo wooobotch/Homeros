@@ -1,6 +1,7 @@
 #include "window.hpp"
 #include <iostream>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_ttf.h>
 
 Window::Window(const std::string& title, int width, int height, int targetFps)
     : window(nullptr), running(true) {
@@ -21,11 +22,18 @@ Window::Window(const std::string& title, int width, int height, int targetFps)
         return;
     }
 
+    if (TTF_Init() != 0) {
+        std::cerr << "Error inicializando SDL_ttf: " << TTF_GetError() << std::endl;
+        running = false;
+        return;
+    }
+
     frameDelay = 1000 / targetFps; // Calculamos el tiempo de cada frame
 }
 
 Window::~Window() {
     SDL_DestroyWindow(window);
+    TTF_Quit();
     SDL_Quit();
 }
 
