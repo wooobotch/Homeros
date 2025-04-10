@@ -36,6 +36,10 @@ void MenuScene::handleInput(SDL_Event& event) {
             std::cout << "Seleccionado: " << options[selectedIndex] << std::endl;
             if (options[selectedIndex] == "Salir") {
                 exit(0);
+            } else if (options[selectedIndex] == "Iniciar"){
+                sceneManager.changeScene("game");
+            } else if (options[selectedIndex] == "Opciones"){
+                sceneManager.changeScene("options");
             }
         }
     }
@@ -69,6 +73,8 @@ void MenuScene::handleInput(SDL_Event& event) {
                 std::cout << "Clickeado: " << options[i] << std::endl;
                 if (options[i] == "Salir") {
                     exit(0);
+                } else if (options[selectedIndex] == "Iniciar"){
+                    sceneManager.changeScene("game");
                 }
                 // Acción específica según la opción
                 break;
