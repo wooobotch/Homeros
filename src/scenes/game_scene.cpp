@@ -20,9 +20,15 @@ GameScene::~GameScene() {
 void GameScene::handleInput(SDL_Event& event) {
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_ESCAPE) {
-            std::cout << "Volviendo al menú..." << std::endl;
-            sceneManager.changeScene("menu");
+//            std::cout << "Volviendo al menú..." << std::endl;
+//            sceneManager.changeScene("menu");
+              isPaused = !isPaused;
         }
+    }
+
+    if (isPaused) {
+        pauseMenu.handleInput(event);
+        return;
     }
 
     if (event.type == SDL_QUIT) {
@@ -31,7 +37,8 @@ void GameScene::handleInput(SDL_Event& event) {
 }
 
 void GameScene::update() {
-    // Por ahora, sin lógica interna
+    if (isPaused) return;
+    // Más lógica por acá.
 }
 
 void GameScene::render(Renderer& renderer) {
@@ -46,5 +53,8 @@ void GameScene::render(Renderer& renderer) {
         SDL_DestroyTexture(textTex);
     }
 
-    renderer.present();
+    if (isPaused) {
+        pauseMenu.render(renderer);  // Superpone el menú
+    }
+
 }

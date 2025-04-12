@@ -67,5 +67,4 @@ void OptionsScene::render(Renderer& renderer) {
         }
     }
 
-    renderer.present();
 }

@@ -6,6 +6,7 @@
 #include "../scene_manager.hpp"
 //#include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include "../ui/pause_menu.hpp"
 
 class GameScene : public Scene {
 public:
@@ -18,6 +19,7 @@ public:
 
 private:
     SceneManager& sceneManager;
+    PauseMenu pauseMenu;
     TTF_Font* font;
 };
 

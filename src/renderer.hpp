@@ -22,6 +22,10 @@ public:
     SDL_Texture* renderText(const std::string& message, TTF_Font* font, SDL_Color color);
     void renderTextTexture(SDL_Texture* texture, int x, int y);
 
+    void drawRect(const SDL_Rect& rect, SDL_Color color, bool filled = true);
+
+    void drawText(TTF_Font* font, const std::string& message, int x, int y, SDL_Color color, bool centered = false);
+
 //Ver renderer.cpp
 //    void setClearColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 

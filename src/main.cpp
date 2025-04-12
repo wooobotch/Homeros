@@ -27,7 +27,10 @@ int main() {
         inputHandler.handleEvents(running);
 
         sceneManager.update();
+
+        renderer.clear();
         sceneManager.render(renderer);
+        renderer.present();
 
         window.delayFrame();
     }

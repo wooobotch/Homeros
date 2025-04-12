@@ -63,3 +63,27 @@ void Renderer::renderTextTexture(SDL_Texture* texture, int x, int y) {
     SDL_QueryTexture(texture, nullptr, nullptr, &destRect.w, &destRect.h);
     SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 }
+
+void Renderer::drawRect(const SDL_Rect& rect, SDL_Color color, bool filled) {
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);  // Necesario para alpha
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+    if (filled) {
+        SDL_RenderFillRect(renderer, &rect);
+    } else {
+        SDL_RenderDrawRect(renderer, &rect);
+    }
+}
+
+void Renderer::drawText(TTF_Font* font, const std::string& message, int x, int y, SDL_Color color, bool centered) {
+    SDL_Texture* texture = renderText(message, font, color);
+    if (!texture) return;
+
+    SDL_Rect destRect;
+    SDL_QueryTexture(texture, nullptr, nullptr, &destRect.w, &destRect.h);
+
+    destRect.x = centered ? x - destRect.w / 2 : x;
+    destRect.y = centered ? y - destRect.h / 2 : y;
+
+    SDL_RenderCopy(renderer, texture, nullptr, &destRect);
+    SDL_DestroyTexture(texture);  // Evitamos fugas
+}

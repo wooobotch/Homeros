@@ -38,10 +38,8 @@ void SplashScreenScene::update() {
 }
 
 void SplashScreenScene::render(Renderer& renderer) {
-    renderer.clear();
     SDL_SetRenderDrawColor(renderer.getSDLRenderer(), 0, 0, 0, 255);
     if (logoTexture) {
         renderer.renderTexture(logoTexture, 100, 100, 300, 200); // Posición y tamaño arbitrarios
     }
-    renderer.present();
 }

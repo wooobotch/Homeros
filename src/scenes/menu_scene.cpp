@@ -106,6 +106,4 @@ void MenuScene::render(Renderer& renderer) {
             SDL_DestroyTexture(textTex);
         }
     }
-
-    renderer.present();
 }
