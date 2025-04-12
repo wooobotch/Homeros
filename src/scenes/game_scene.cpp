@@ -1,8 +1,8 @@
 #include "game_scene.hpp"
 #include <iostream>
 
-GameScene::GameScene(SceneManager& sceneManager)
-    : sceneManager(sceneManager), font(nullptr) {
+GameScene::GameScene(SceneManager& sceneManager, Renderer& renderer)
+    : sceneManager(sceneManager), font(nullptr), pauseMenu(renderer, 400, 400) {
     font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 24);
     if (!font) {
         std::cerr << "Error cargando fuente en GameScene: " << TTF_GetError() << std::endl;
@@ -54,7 +54,7 @@ void GameScene::render(Renderer& renderer) {
     }
 
     if (isPaused) {
-        pauseMenu.render(renderer);  // Superpone el menú
+        pauseMenu.render();  // Superpone el menú
     }
 
 }

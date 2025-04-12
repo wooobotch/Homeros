@@ -10,7 +10,7 @@
 
 class GameScene : public Scene {
 public:
-    GameScene(SceneManager& sceneManager);
+    GameScene(SceneManager& sceneManager, Renderer& renderer);
     ~GameScene();
 
     void handleInput(SDL_Event& event) override;
@@ -21,6 +21,7 @@ private:
     SceneManager& sceneManager;
     PauseMenu pauseMenu;
     TTF_Font* font;
+    bool isPaused = false;
 };
 
 #endif
