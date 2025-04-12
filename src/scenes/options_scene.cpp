@@ -2,9 +2,11 @@
 #include <iostream>
 
 OptionsScene::OptionsScene(SceneManager& sceneManager)
-    : sceneManager(sceneManager), options({"Brillo", "Volumen", "Idioma", "Sorpresa"}), selectedIndex(0), font(nullptr) {
+    : sceneManager(sceneManager), options({"Brillo", "Volumen", "Idioma", "Sorpresa", "Volver"}),
+      selectedIndex(0),
+      font(nullptr) {
 
-    font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 28);
+    font = TTF_OpenFont("assets/fonts/FreeSans.ttf", 24);
     if (!font) {
         std::cerr << "Error cargando fuente en OptionsScene: " << TTF_GetError() << std::endl;
     }
@@ -33,7 +35,12 @@ void OptionsScene::handleInput(SDL_Event& event) {
         } else if (key == SDLK_UP) {
             selectedIndex = (selectedIndex - 1 + options.size()) % options.size();
         } else if (key == SDLK_RETURN || key == SDLK_KP_ENTER) {
-            std::cout << "Elegiste: " << options[selectedIndex] << " (sin acción por ahora)." << std::endl;
+            std::cout << "Elegiste: " << options[selectedIndex] << std::endl;
+            if (options[selectedIndex] == "Volver") {
+                sceneManager.changeScene("menu");
+            } else if (options[selectedIndex] == "Sorpresa") {
+                std::cout << "Algo va a pasar, eventualmente" << std::endl;
+            }
         }
     }
 }
