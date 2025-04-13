@@ -14,6 +14,8 @@ def collect_sources():
     sources = []
     for source_dir in SOURCE_DIRS:
         for root, _, files in os.walk(source_dir):
+            if "external" in root or "tests" in root:
+                continue
             for file in files:
                 if file.endswith(".cpp"):
                     full_path = os.path.join(root, file).replace("\\", "/")
