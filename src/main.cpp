@@ -1,4 +1,5 @@
 #include <iostream>
+#include "audio_manager.hpp"
 #include "input_handler.hpp"
 #include "window.hpp"
 #include "renderer.hpp"
@@ -13,6 +14,15 @@ int main() {
     Renderer renderer(window);
     SceneManager sceneManager;
     InputHandler inputHandler(sceneManager);
+
+    AudioManager audio;
+
+    audio.loadMusic("fondo", "assets/audio/music.ogg");
+    audio.loadSound("click", "assets/audio/click.wav");
+
+    audio.playMusic("fondo");
+    audio.playSound("click");
+
 
     sceneManager.addScene("splash", std::make_shared<SplashScreenScene>(renderer, sceneManager, "assets/logo.png"));
     sceneManager.addScene("menu", std::make_shared<MenuScene>(sceneManager));
@@ -35,6 +45,7 @@ int main() {
         window.delayFrame();
     }
 
+    audio.clear();
     TTF_Quit();
     SDL_Quit();
     return 0;
