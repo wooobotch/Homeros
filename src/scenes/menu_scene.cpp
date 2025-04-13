@@ -25,7 +25,7 @@ void MenuScene::handleInput(SDL_Event& event) {
 
     if (event.type == SDL_KEYDOWN) {
         SDL_Keycode key = event.key.keysym.sym;
-        if (key == SDLK_ESCAPE) {
+        if (key == SDLK_SPACE) {
             std::cout << "Saliendo desde el menú..." << std::endl;
             exit(0);
         } else if (key == SDLK_DOWN) {
@@ -77,6 +77,8 @@ void MenuScene::handleInput(SDL_Event& event) {
                     exit(0);
                 } else if (options[selectedIndex] == "Iniciar"){
                     sceneManager.changeScene("game");
+                } else if (options[selectedIndex] == "Opciones"){
+                    sceneManager.changeScene("options");
                 }
                 // Acción específica según la opción
                 break;

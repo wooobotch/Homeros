@@ -19,7 +19,8 @@ GameScene::~GameScene() {
 
 void GameScene::handleInput(SDL_Event& event) {
     if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_ESCAPE) {
+        if (event.key.keysym.sym == SDLK_SPACE) {
+//            std::cout << "Volviendo al menú..." << std::endl;
 //            std::cout << "Volviendo al menú..." << std::endl;
 //            sceneManager.changeScene("menu");
               isPaused = !isPaused;

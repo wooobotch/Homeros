@@ -44,7 +44,7 @@ void PauseMenu::handleInput(const SDL_Event& event) {
 
     if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym) {
-            case SDLK_ESC:
+            case SDLK_TAB:
                 toggle();
                 break;
             case SDLK_UP:
